@@ -1,4 +1,4 @@
-package cc.openhome.util;
+package util;
 
 public class Console {
     public static void writeLine(String text) {
