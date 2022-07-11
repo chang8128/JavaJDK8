@@ -11,6 +11,7 @@ public class Sum {
             sum += number;
         } while(number != 0);
         System.out.println("总和：" +sum);
+        scanner.close(); //申请了一个输入流system.in 在你用完这个后要将其关闭。
     }
 
 }
