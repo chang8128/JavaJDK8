@@ -1,7 +1,7 @@
 public class HanoiGame {
     public static void main(String[] args) {
         // 看一下油管李永乐老师的讲解，能轻松理解本算法 https://www.youtube.com/watch?v=1QgJEcnsqsQ
-        int n = 20;                         //一共需要移动的盘子
+        int n = 10;                         //一共需要移动的盘子
         char a = 'A', b = 'B', c = 'C';    //柱子A（起始柱）、B（中间柱）、C（目标柱）
         hanio(n, a, b, c);
     }
@@ -23,6 +23,6 @@ public class HanoiGame {
     }
 
     public static void move(int n, char a, char b) {
-        System.out.println("把第"+ n +"个盘子从"+ a +"移到"+b);
+        System.out.println("把第"+ n +"个盘子从"+ a +"移到"+ b);
     }
 }
