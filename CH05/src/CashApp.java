@@ -14,5 +14,6 @@ public class CashApp {
             card.store(scanner.nextInt());
             System.out.printf("明细 (%s, %d, %d)%n", card.getNumber(), card.getBalance(), card.getBonus());
         }
+        scanner.close();
     }
 }
