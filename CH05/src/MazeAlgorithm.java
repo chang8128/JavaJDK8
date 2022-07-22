@@ -1,15 +1,19 @@
+/*
+ * copy from https://blog.csdn.net/qq_46092061/article/details/117018612
+ */
+
 public class MazeAlgorithm {
     static int[][] matrix;
     public static void main(String[] args) {
         // 1 is wall, 2 is pass, -1 is not way and avoid try again.
         matrix = new int[][] {
             {1,1,1,1,1,1,1,1,1,1,1,1,1}, //i 0
-            {1,0,0,1,0,0,0,0,0,1,0,0,1}, //i 1
+            {1,0,1,1,0,0,0,0,0,1,0,0,1}, //i 1
             {1,0,1,1,1,1,1,1,1,1,1,1,1}, //i 2
-            {1,0,1,1,1,1,1,1,1,1,1,1,1}, //i 3
-            {1,0,1,1,1,1,1,1,1,1,1,1,1}, //i 4
-            {1,0,0,0,0,0,0,0,0,0,0,0,1}, //i 5
-            {1,0,1,1,1,1,1,1,1,1,1,0,1}, //i 6
+            {1,0,0,1,1,0,0,0,0,0,1,1,1}, //i 3
+            {1,0,1,1,1,0,1,1,1,0,1,1,1}, //i 4
+            {1,0,0,0,0,0,1,0,0,0,0,0,1}, //i 5
+            {1,0,0,1,1,1,1,1,1,1,0,0,1}, //i 6
             {1,1,1,1,1,1,1,1,1,1,1,1,1}, //i 7
         };
         //begin at [1][1], end at [6][11]
@@ -27,13 +31,13 @@ public class MazeAlgorithm {
         //判断四个方向是否可行，一个方向可行就往深度递归，否则：回溯
         if (matrix[i][j] == 0) {  //如果该点未访问过，则从该点开始探索
             matrix[i][j] = 2;
-            if (recursion(i--, j)) {  //先往上走
+            if (recursion(i-1, j)) {  //先往上走
                 return true;
-            } else if (recursion(i, j++)) {  //往右走
+            } else if (recursion(i+1, j)) {  //往右走
                 return true;
-            } else if (recursion(i++, j)) {  //向下走
+            } else if (recursion(i, j-1)) {  //往左走
                 return true;
-            } else if (recursion(i, j--)) {  //向左走
+            } else if (recursion(i, j+1)) {  //向右走
                 return true;
             } else {  //四个方向都走不通，说明该递归分支不行，回溯
                 matrix[i][j] = -1;

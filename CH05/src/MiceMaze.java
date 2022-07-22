@@ -1,16 +1,22 @@
+/* 
+ * study by myself, but always have some problem
+ * Now the problem is I do not know how to avoid the wall should not be replaced.
+ * 好像墙壁被替换的原因在于 j++, 应该用 j+1, 不知道用 j++ 为啥墙壁会被替换掉 
+ */
 public class MiceMaze {
+    static char[][] maze;
     public static void main(String[] args) {
-        char[][] maze = {
+        maze = new char[][] {
           //█ 是墙壁， space 是道路， + 是老鼠
-          //y 0   1   2   3   4   5   6   7   8   9  10  11  12 
-            {'█','█','█','█','█','█','█','█','█','█','█','█','█'}, //axis x: 0
-            {'+',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','█'}, //axis x: 1
-            {'█',' ',' ','█','█','█','█','█','█','█','█',' ','█'}, //axis x: 2
-            {'█',' ','█','█','█',' ',' ',' ','█',' ',' ',' ','█'}, //axis x: 3
-            {'█',' ',' ','█',' ',' ','█',' ','█',' ','█',' ','█'}, //axis x: 4
-            {'█',' ',' ','█',' ','█','█',' ',' ',' ','█',' ','█'}, //axis x: 5
-            {'█',' ',' ',' ',' ','█',' ','█','█',' ',' ',' ','█'}, //axis x: 6
-            {'█','█','█','█','█','█','█','█','█','█','█',' ','█'}, //axis x: 7
+          //y 0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
+            {'█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█'}, //x: 0
+            {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','█','█','█','█'}, //x: 1
+            {'█',' ',' ','█','█','█','█','█','█','█','█','█','█',' ',' ','█'}, //x: 2
+            {'█',' ','█','█','█',' ',' ',' ','█',' ','█',' ',' ',' ',' ','█'}, //x: 3
+            {'█',' ',' ','█',' ',' ','█',' ','█',' ','█',' ','█','█',' ','█'}, //x: 4
+            {'█',' ',' ','█',' ','█',' ',' ',' ',' ','█',' ',' ','█',' ','█'}, //x: 5
+            {'█',' ',' ',' ',' ','█',' ','█','█',' ',' ',' ','█','█',' ','█'}, //x: 6
+            {'█','█','█','█','█','█',' ','█','█','█','█','█','█','█',' ','█'}, //x: 7
         };
       
         // print the maze;
@@ -21,6 +27,9 @@ public class MiceMaze {
             }
             System.out.println();
         }
+
+        // set the begin point
+        setWay(1, 0);
 
         //输出新地图
         System.out.println("输出到达终点的地图");
@@ -33,12 +42,29 @@ public class MiceMaze {
     }
 
     //设置走迷宫的策略
-    public static boolean setWay(char[][] maze, int i, int j) {
-        //recursion condition end at the (7, 11)
-        if (maze[7][11] == '+') {  //to the end
+    public static boolean setWay(int i, int j) {
+        //recursion condition end at the (6, 14)
+        if (maze[7][14] == '+') {  //to the end
             return true;
-        } else { 
-            return false;
-        }
-    }
+        } else {
+            // 判断四个方向是否可行，否则，回溯
+            if (maze[i][j] == ' ') {
+                maze[i][j] = '+';
+                if (setWay(i, j+1)) {
+                    return true;
+                } else if (setWay(i+1, j)) {
+                    return true;
+                } else if (setWay(i-1, j)) {
+                    return true;
+                } else if (setWay(i+1, j)) {
+                    return true;
+                } else {
+                    maze[i][j] = '◇';
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } 
+    } 
 }
